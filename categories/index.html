@@ -97,7 +97,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -211,35 +211,32 @@
 
 
 
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "Kw2uabRMJXpTd8sHJz7H6dsC-gzGzoHsz",
+            appKey: "sPNtKBmtbNaCqzfV6y97Akxi",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
 
 
 
-    <section class="comments" id="comments">
-        <div id="hypercomments_widget"></div>
-        <script type="text/javascript">
-            var hyper_id = 'id';
-            _hcwp = window._hcwp || [];
-            _hcwp.push({
-                widget: "Stream",
-                widget_id: hyper_id
-            });
-            (function () {
-                if ("HC_LOAD_INIT" in window) return;
-                HC_LOAD_INIT = true;
-                var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(
-                    0, 2).toLowerCase();
-                var hcc = document.createElement("script");
-                hcc.type = "text/javascript";
-                hcc.async = true;
-                hcc.src = ("https:" == document.location.protocol ? "https" : "http") +
-                    "://w.hypercomments.com/widget/hc/" + hyper_id + "/" + lang + "/widget.js";
-                var s = document.getElementsByTagName("script")[0];
-                s.parentNode.insertBefore(hcc, s.nextSibling);
-            })();
-
-        </script>
-        <a href="http://hypercomments.com" rel="nofollow" class="hc-link" title="comments widget">comments powered by HyperComments</a>
-    </section>
 
 
 
@@ -292,7 +289,7 @@
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
