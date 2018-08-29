@@ -30,7 +30,11 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/image/20180829/BHXT.jpg">
 <meta property="og:image" content="http://yoursite.com/image/20180829/BHXT2.jpg">
-<meta property="og:updated_time" content="2018-08-29T08:39:02.999Z">
+<meta property="og:image" content="http://yoursite.com/image/20180829/BHXT3.jpg">
+<meta property="og:image" content="http://yoursite.com/image/20180829/BHXT4.jpg">
+<meta property="og:image" content="http://yoursite.com/image/20180829/BHXT5.jpg">
+<meta property="og:image" content="http://yoursite.com/image/20180829/BHXT6.jpg">
+<meta property="og:updated_time" content="2018-08-29T08:45:23.262Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈DC-DC开关电源的两种闭环系统控制方式">
 <meta name="twitter:description" content="DC-DC开关电源闭环系统的介绍在DC-DC开关电源中，无论是隔离型拓扑还是非隔离型拓扑，其实都由以下三个基本的部件来构成一个稳定的闭环系统：调幅器、输出滤波器、反馈补偿网络。其中调幅器和输出滤波器构成了此闭环系统的前向通道，又可以将此前项通道称为开关电源的功率级。而反馈补偿网络构成了此闭环系统的反馈通道，称为开关电源的反馈级。">
@@ -139,7 +143,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#DC-DC开关电源闭环系统的介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">DC-DC开关电源闭环系统的介绍</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#DC-DC开关电源闭环系统的介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">DC-DC开关电源闭环系统的介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#电压模式控制方式"><span class="post-toc-number">2.</span> <span class="post-toc-text">电压模式控制方式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#电流模式控制方式"><span class="post-toc-number">3.</span> <span class="post-toc-text">电流模式控制方式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">4.</span> <span class="post-toc-text">总结</span></a></li></ol>
         </nav>
     </aside>
 
@@ -183,6 +187,42 @@
 <p>BUCK电路的输出滤波器为图中绿色部分，是一个LC电路，包括L的DCR和C的ESR。调幅器的输出用于滤波器的输入，滤波器的输出即是BUCK电路的VOUT。</p>
 <p>图中的红色部分为反馈补偿网络，将反馈输出值（VOUT）与参考电压值（VREF）比较后放大，并加以一定形式的补偿网络，作为调幅器的输入。</p>
 <p>实例这种BUCK电路的闭环系统控制方式又被称为电压模式控制（Current-mode control），于此同时，我们常用的还有一种闭环系统控制方式称为电流模式控制（Current-mode control）。以下我将对这两种闭环系统控制方式进行一个简单介绍。</p>
+<h2 id="电压模式控制方式"><a href="#电压模式控制方式" class="headerlink" title="电压模式控制方式"></a>电压模式控制方式</h2><p>电压模式控制（VMC）的优点是控制环路简单，缺点是稳定性比较差。主要应用于BUCK电路中，具体控制过程在BUCK电路的闭环系统实例中已有介绍。</p>
+<p>电压模式控制的BUCK电路功率级的传递函数和伯德图如下图所示，我们可以发现这种控制方式在BUCK电路中存在一个共轭复极点和一个零点。共轭复极点使得GAIN以每十倍频程-40dB穿越0dB线，造成系统不稳定，需要通过补偿网络进行补偿。这种电压模式控制的BUCK电路因为存在共轭复极点对补偿网络的要求比较高，一般通过Type III型补偿网络进行补偿。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/20180829/BHXT3.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="电流模式控制方式"><a href="#电流模式控制方式" class="headerlink" title="电流模式控制方式"></a>电流模式控制方式</h2><p>电流模式控制（CMC）的优点是稳定性较好，缺点是控制环路复杂。它的应用面比较广，一般各种类型的DC-DC开关电源均可以使用此控制方式。首先我们还是通过BUCK电路来介绍其控制过程。</p>
+<p>下图即是一个完整电流模式控制BUCK电路，它在电压模式控制的基础上增加了一个电感电流采样的过程，它将采样电感电流转换成的电压与三角波叠加后再与反馈补偿网络的输出进行比较，得到驱动电压。构成了一种近似双闭环的控制方式。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/20180829/BHXT4.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>电流模式控制的BUCK电路功率级的传递函数和伯德图如下图所示。对比电压模式控制我们可以发现，它将电压模式中的共轭复极点进行了分离，分离成了两个单极点。这提高了系统的稳定性并且降低了对补偿网络的需求，一般通过Type II型补偿网络进行补偿。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/20180829/BHXT5.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>在实际使用中，BUCK电路采用电流模式控制的情况比较少，但BOOST电路一般都采用电流模式控制，BOOST电路功率级的传递函数和伯德图如下图所示。对比BUCK电路我们可以发现，虽然BOOST电路较为复杂，存在两个极点和两个零点，但是它不存在共轭复极点，所以通过Type II型补偿网络即可以进行补偿。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/20180829/BHXT6.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文主要通过几个实例介绍了DC-DC开关电源的闭环系统和两种闭环系统控制方式：电压模式控制和电流模式控制。这两种控制方式各有其优缺点，实际使用中，我们需要根据不同的DC-DC电路选择其合适的控制方式和反馈补偿网络，使得DC-DC闭环系统达到稳定，并且使其动态响应达到最优。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">之后的几篇文章会对常用的几种反馈补偿网络进行简单的介绍，并对如何合理选择和计算反馈补偿网络进行说明。</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -191,7 +231,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2018-08-29T08:39:02.999Z" itemprop="dateUpdated">2018-08-29 16:39:02</time>
+    Last updated: <time datetime="2018-08-29T08:45:23.262Z" itemprop="dateUpdated">2018-08-29 16:45:23</time>
 </span><br>
 
 
